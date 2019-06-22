@@ -37,36 +37,40 @@ def get_color_hsv(i, z):
     return (int(hue * 255), 255, 255)
 
 
-def draw(c, i, z):
+def draw(image, c, i, z):
     # Move origin and scale
     c = (c - complex(MIN_X, MIN_Y)) / step
 
     # Draw
     color = get_color_hsv(i, z)
-    image_draw.point([c.real, c.imag], color)
+    image.point([c.real, c.imag], color)
 
 
-print('Building...')
+def main():
+    print('Building...')
 
-image = Image.new('HSV', (width, height), (0, 0, 0))
-# image = Image.new('RGB', (width, height), (0, 0, 0))
-image_draw = ImageDraw.Draw(image)
+    image = Image.new('HSV', (width, height), (0, 0, 0))
+    # image = Image.new('RGB', (width, height), (0, 0, 0))
+    image_draw = ImageDraw.Draw(image)
 
-for x in numpy.arange(MIN_X, MAX_X, step):
-    for y in numpy.arange(MIN_Y, MAX_Y, step):
-        c = complex(x, y)
-        z = complex(0, 0)
+    for x in numpy.arange(MIN_X, MAX_X, step):
+        for y in numpy.arange(MIN_Y, MAX_Y, step):
+            c = complex(x, y)
+            z = complex(0, 0)
 
-        i = 0
-        while i < MAX_ITERATIONS:
-            i += 1
-            z = z * z + c
-            if abs(z) > 2:
-                break
+            i = 0
+            while i < MAX_ITERATIONS:
+                i += 1
+                z = z * z + c
+                if abs(z) > 2:
+                    break
 
-        draw(c, i, z)
+            draw(image_draw, c, i, z)
 
-image.show()
-image.close()
+    image.show()
+    image.close()
 
-print('Done.')
+    print('Done.')
+
+if __name__ == '__main__':
+    main()
