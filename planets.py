@@ -4,7 +4,7 @@ import arcade
 # Screen dimension constants
 SCREEN_WIDTH = 1024
 SCREEN_HEIGHT = 768
-TITLE ='Binary star system'
+TITLE = 'Binary star system'
 
 # Physics constants
 M1 = 1
@@ -23,7 +23,8 @@ vx1 = 0
 vy1 = 15
 
 vx2 = 0
-vy2 = - vy1 * M1 / M2 # Ensure center mass has 0 initial velocity
+vy2 = - vy1 * M1 / M2  # Ensure center mass has 0 initial velocity
+
 
 def draw(time_delta):
     arcade.start_render()
@@ -43,7 +44,7 @@ def draw(time_delta):
 
         ax2 = a2 * x12 / r
         ay2 = a2 * y12 / r
-        
+
         vx1 = vx1 + ax1 * time_step
         vy1 = vy1 + ay1 * time_step
 
@@ -58,9 +59,11 @@ def draw(time_delta):
     arcade.draw_circle_filled(x1, y1, 10, arcade.color.BLUE)
     arcade.draw_circle_filled(x2, y2, 50, arcade.color.RED)
 
+
 def on_key_press(key, modifier):
     if key == arcade.key.Q:
         arcade.close_window()
+
 
 def main():
     window = arcade.open_window(SCREEN_WIDTH, SCREEN_HEIGHT, TITLE)
@@ -74,6 +77,6 @@ def main():
 
     arcade.run()
 
+
 if __name__ == "__main__":
     main()
-
