@@ -4,7 +4,7 @@ import arcade
 # Screen dimension constants
 SCREEN_WIDTH = 1024
 SCREEN_HEIGHT = 768
-TITLE ='Planet simulator'
+TITLE ='Binary star system'
 
 # Physics constants
 M1 = 1
@@ -13,11 +13,11 @@ G = 1e4
 TICK_STEPS = 500
 
 # Variables
-x1 = 800
-y1 = 380
+x1 = SCREEN_WIDTH * 5 / 6
+y1 = SCREEN_HEIGHT / 2
 
-x2 = 300
-y2 = 380
+x2 = SCREEN_WIDTH * 2 / 6
+y2 = SCREEN_HEIGHT / 2
 
 vx1 = 0
 vy1 = 15
@@ -44,8 +44,8 @@ def draw(time_delta):
         x2 = x2 + vx2 * (1 / TICK_STEPS)
         y1 = y1 + vy1 * (1 / TICK_STEPS)
         y2 = y2 + vy2 * (1 / TICK_STEPS)
-    arcade.draw_circle_filled(x1, y1, 5, arcade.color.BLUE)
-    arcade.draw_circle_filled(x2, y2, 25, arcade.color.RED)
+    arcade.draw_circle_filled(x1, y1, 10, arcade.color.BLUE)
+    arcade.draw_circle_filled(x2, y2, 50, arcade.color.RED)
 
 def on_key_press(key, modifier):
     if key == arcade.key.Q:
@@ -56,7 +56,7 @@ def main():
 
     arcade.set_background_color(arcade.color.BLACK)
 
-    arcade.schedule(draw, 1 / 50)
+    arcade.schedule(draw, 1 / 100)
 
     window.on_key_press = on_key_press
     print('Press \'q\' to exit')
