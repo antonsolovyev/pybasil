@@ -28,22 +28,33 @@ vy2 = - vy1 * M1 / M2 # Ensure center mass has 0 initial velocity
 def draw(time_delta):
     arcade.start_render()
     global x1, x2, y1, y2, vx1, vx2, vy1, vy2
+    time_step = 1 / TICK_STEPS
     for i in range(0, TICK_STEPS):
-        r = math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2))
+        x12 = x1 - x2
+        y12 = y1 - y2
+
+        r = math.sqrt(x12 * x12 + y12 * y12)
+
         a1 = G * M2 / (r * r)
         a2 = G * M1 / (r * r)
-        ax1 = - a1 * (x1 - x2) / r
-        ay1 = - a1 * (y1 - y2) / r
-        ax2 = a2 * (x1 - x2) / r
-        ay2 = a2 * (y1 - y2) / r
-        vx1 = vx1 + ax1 * (1 / TICK_STEPS)
-        vx2 = vx2 + ax2 * (1 / TICK_STEPS)
-        vy1 = vy1 + ay1 * (1 / TICK_STEPS)
-        vy2 = vy2 + ay2 * (1 / TICK_STEPS)
-        x1 = x1 + vx1 * (1 / TICK_STEPS)
-        x2 = x2 + vx2 * (1 / TICK_STEPS)
-        y1 = y1 + vy1 * (1 / TICK_STEPS)
-        y2 = y2 + vy2 * (1 / TICK_STEPS)
+
+        ax1 = - a1 * x12 / r
+        ay1 = - a1 * y12 / r
+
+        ax2 = a2 * x12 / r
+        ay2 = a2 * y12 / r
+        
+        vx1 = vx1 + ax1 * time_step
+        vy1 = vy1 + ay1 * time_step
+
+        vx2 = vx2 + ax2 * time_step
+        vy2 = vy2 + ay2 * time_step
+
+        x1 = x1 + vx1 * time_step
+        x2 = x2 + vx2 * time_step
+
+        y1 = y1 + vy1 * time_step
+        y2 = y2 + vy2 * time_step
     arcade.draw_circle_filled(x1, y1, 10, arcade.color.BLUE)
     arcade.draw_circle_filled(x2, y2, 50, arcade.color.RED)
 
