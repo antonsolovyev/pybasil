@@ -94,10 +94,8 @@ def main():
     window.on_key_press = on_key_press
 
     # Run the program
+    print('Press \'q\' to exit')
     arcade.run()
-
-    # When done running the program, close the window.
-    arcade.close_window()
 
 
 if __name__ == "__main__":
