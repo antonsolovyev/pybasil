@@ -7,9 +7,6 @@ from pyspark.sql import SparkSession
 
 
 if __name__ == '__main__':
-    """
-        Usage: pi [partitions]
-    """
     spark = SparkSession.builder.master('spark://white.home:7077').appName("PI on Spark").getOrCreate()
 
     partitions = 30
