@@ -31,7 +31,7 @@ def get_color_hsv(i, z):
     if i == MAX_ITERATIONS:
         return (0, 0, 0)
 
-    hue = i + 1.0 - math.log(math.log2(abs(z)))
+    hue = i + 1.0 - math.log(math.log(abs(z), 2))
     hue = hue / MAX_ITERATIONS
 
     return (int(hue * 255), 255, 255)
